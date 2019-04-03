@@ -8,7 +8,496 @@
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
 
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
+}
+
+.l-side-margins {
+    &:before, &:after {
+        display: none !important;
+    }
+}
+
+.content--interactive {
+    overflow-x: hidden;
+    overflow: hidden;
+
+    h2 {
+        visibility: hidden;
+        margin-top: -6px;
+
+        &:after {
+            height: 1px;
+            background-color: #ececec;
+            content: '';
+            display: block;
+            width: 110%;
+            visibility: visible;
+            margin-bottom: 6px;
+
+            @include mq($from: tablet) {
+                margin-left: 11px;
+                width: 50%;
+            }
+        }
+    }
+
+    h2 + p {
+        &:first-letter {
+            font-family: "Guardian Titlepiece";
+            float: left;
+            font-size: 114px;
+            line-height: 90px;
+            margin-right: 6px;
+        }
+    }
+}
+
+.interactive-wrapper.interactive-audio-player-wrapper.processed:before {
+    @include mq($from: desktop) {
+        content: '';
+        width: 4px;
+        top: 0;
+        bottom: 6px;
+        position: absolute;
+        background-color: black;
+        left: 8px;
+        z-index: 1;
+    }
+}
+
+.content__meta-footer {
+    display: none;
+}
+
+sup {
+    font-size: 24px;
+    line-height: 24px;
+    font-family: $f-serif-headline;
+    color: #121212;
+    border-top: 1px solid #ececec;
+    line-height: 29px;
+    display: block;
+    margin-top: 22px;
+    max-width: 390px;
+
+    a {
+        color: #121212 !important;
+        border-bottom: 1px solid #ececec;
+
+        &:hover {
+            border-bottom: 1px solid #121212;
+            text-decoration: none;
+        }
+    }
+}
+
+.interactive-audio-player-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 6px;
+
+    @include mq($from: tablet) {
+        margin: 5px 6px 9px 12px !important;
+        padding: 8px 12px 9px 7px !important;
+    }
+}
+
+//app specific styling
+.ios, .android {
+    .article__header {
+        height: 94vh;
+        background-image: url(https://uploads.guim.co.uk/2018/08/14/obama_cut_higher.png);
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 210%;
+        position: relative;
+        border-bottom: 1px solid #ececec;
+
+        @include mq($from: mobileLandscape) {
+            background-size: 180%;
+        }
+        @include mq($from: tablet) {
+            background-size: 140%;
+        }
+        @include mq($from: desktop) {
+            background-size: contain;
+        }
+
+        &:before {
+            position: absolute;
+            top: -12vw;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            content: '';
+            display: block;
+            opacity: 0;
+            z-index: 0;
+            background-image: url('https://uploads.guim.co.uk/2018/08/15/obama_hand_mobile.jpg');
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            animation: fadein;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+            animation-delay: 0.5s;
+            animation-duration: 2.5s;
+            -webkit-animation: fadein;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-iteration-count: 1;
+            -webkit-animation-delay: 0.5s;
+            -webkit-animation-duration: 2.5s;
+
+            @include mq($from: desktop) {
+                background-image: url('https://uploads.guim.co.uk/2018/08/15/obama_hand_desktop_updated.jpg');
+                background-position: center center;
+            }
+        }
+        .headline {
+            visibility:hidden;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 1px;
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+
+            &:after, &:before {
+                visibility: visible;
+                content: 'Dear';
+                display: block;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                color: #fff;
+                font-family: "Guardian Titlepiece";
+                font-size: 40px;
+                height: 6px;
+                width: 160px;
+
+                @include mq($from: mobileMedium){
+                    font-size: 60px;
+                    height: 20px;
+                }
+
+                @include mq($from: desktop) {
+                    width: 470px;
+                    height: 45px;
+                    font-size: 90px;
+                    line-height: 77px;
+                }
+            }
+            &:after {
+                content: 'Obama';
+                color: #FFBB00;
+                height: 40px;
+
+                @include mq($from: mobileMedium){
+                    height: 60px;
+                    width: 230px;
+                }
+
+                @include mq($from: desktop){
+                    height: 100px;
+                    width: 320px;
+                }
+            }
+        }
+    }
+    .standfirst {
+        text-align: center;
+        max-width: 370px;
+        margin-left: auto;
+        margin-right: auto;
+        color: #fff;
+        font-family: $f-serif-text;
+        font-size: 18px;
+        line-height: 20px;
+        position: absolute;
+        bottom: 0;
+    }
+    .meta {
+        display: none;
+    }
+}
+
+.content--interactive .content__head {
+    height: 94vh;
+    background-image: url(https://uploads.guim.co.uk/2018/08/14/obama_cut_higher.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 210%;
+    position: relative;
+    border-bottom: 1px solid #ececec;
+
+    @include mq($from: mobileLandscape) {
+        background-size: 180%;
+    }
+    @include mq($from: tablet) {
+        background-size: 140%;
+    }
+    @include mq($from: desktop) {
+        background-size: contain;
+    }
+
+    &:before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        content: '';
+        display: block;
+        opacity: 0;
+        z-index: -1;
+        background-image: url('https://uploads.guim.co.uk/2018/08/15/obama_hand_mobile.jpg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: fadein;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+        animation-delay: 0.5s;
+        animation-duration: 2.5s;
+        -webkit-animation: fadein;
+        -webkit-animation-fill-mode: forwards;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-delay: 0.5s;
+        -webkit-animation-duration: 2.5s;
+
+        @include mq($from: desktop) {
+            background-image: url('https://uploads.guim.co.uk/2018/08/15/obama_hand_desktop_updated.jpg');
+            background-position: center center;
+        }
+    }
+
+    .gs-container {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+
+        .content__main-column {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .content__headline {
+            visibility:hidden;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 1px;
+
+            &:after, &:before {
+                visibility: visible;
+                content: 'Dear';
+                display: block;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                color: #fff;
+                font-family: "Guardian Titlepiece";
+                font-size: 40px;
+                height: 6px;
+                width: 160px;
+
+                @include mq($from: mobileMedium){
+                    font-size: 60px;
+                    height: 20px;
+                }
+
+                @include mq($from: desktop) {
+                    width: 470px;
+                    height: 45px;
+                    font-size: 90px;
+                    line-height: 77px;
+                }
+            }
+            &:after {
+                content: 'Obama';
+                color: #FFBB00;
+                height: 40px;
+
+                @include mq($from: mobileMedium){
+                    height: 60px;
+                    width: 230px;
+                }
+
+                @include mq($from: desktop){
+                    height: 100px;
+                    width: 320px;
+                }
+            }
+        }
+        .content__standfirst {
+            text-align: center;
+            max-width: 370px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #fff;
+            font-family: $f-serif-text;
+            font-size: 18px;
+            line-height: 20px;
+        }
+    }
+}
+
+.content__head + .content__main .content__main-column--interactive p {
+    &:first-of-type:first-letter {
+        font-family: "Guardian Titlepiece";
+        float: left;
+        font-size: 114px;
+        line-height: 90px;
+        margin-right: 6px;
+    }
+}
+
+.content__main {
+
+    .content__main-column {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        &.content__main-column--interactive {
+            @include mq($from: tablet) {
+                width: 632px;
+            }
+
+            .element-image {
+                position: relative;
+                z-index: 20;
+
+                img {
+                    height: auto;
+                }
+            }
+
+            figcaption {
+                border-bottom: 1px solid #ececec;
+                background-color: #fff;
+                position: relative;
+                z-index: 20;
+                padding-bottom: 12px;
+                padding-top: 6px;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .element-image__caption, .element-image__credit {
+                font-family: $f-sans-serif-text;
+                color: #979797;
+                font-size: 14px;
+                line-height: 18px;
+                display: block;
+
+            }
+
+            .element--immersive {
+                transform: scale(2) translateY(23%);
+                height: 108vw;
+
+                @include mq($from: mobileLandscape) {
+                    transform: none;
+                    height: auto;
+                }
+
+                @include mq($from: desktop) {
+                    margin-left: -9rem;
+                    margin-right: -9rem;
+                }
+                @include mq($from: leftCol) {
+                    margin-left: -13rem;
+                    margin-right: -13rem;
+                }
+                @include mq($from: wide) {
+                    margin-left: -23rem;
+                    margin-right: -23rem;
+                }
+
+                + .element--immersive {
+                    margin-left: 0;
+
+                    @include mq($from: desktop) {
+                        margin-left: 12px;
+                    }
+
+                    @include mq($from: leftCol) {
+                        margin-left: 12px;
+                    }
+
+                    @include mq($from: wide) {
+                        margin-left: 12px;
+                    }
+                }
+            }
+
+            p {
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
+
+                @include mq($from: tablet) {
+                    width: 600px;
+                    padding-left: 6px;
+                }
+
+                &:before {
+                    @include mq($from: desktop) {
+                        content: '';
+                        display: block;
+                        top: -24px;
+                        bottom: -21px;
+                        left: -2px;
+                        width: 1px;
+                        background-color: #ececec;
+                        position: absolute;
+                    }
+                }
+            }
+        }
+    }
+
+    .content__meta-container {
+        border-left: 1px solid #ececec;
+        border-bottom: 1px solid #ececec;
+
+        .content__dateline, .meta__social, .byline {
+            padding-left: 6px;
+        }
+
+        .byline {
+            color: #121212;
+            font-weight: 800;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .meta__social {
+            span {
+                &:hover {
+                    background-color: #ececec;
+                }
+
+                svg {
+                    path {
+                        fill: #121212;
+                    }
+                }
+            }
+        }
+    }
 }
